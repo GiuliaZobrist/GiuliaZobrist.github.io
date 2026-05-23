@@ -1,0 +1,35 @@
+# Assets (large binaries / source files)
+assets/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Python / Poetry
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+dist/
+*.egg-info/
+.eggs/
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# Build / generated
+node_modules/

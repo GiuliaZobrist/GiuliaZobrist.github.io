@@ -1,6 +1,8 @@
-# Assets — only published/ is tracked
+# Assets — only floating-elements/published/ is tracked
 assets/*
-!assets/published/
+!assets/floating-elements/
+assets/floating-elements/*
+!assets/floating-elements/published/
 
 # macOS
 .DS_Store

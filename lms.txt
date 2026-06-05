@@ -1,0 +1,9 @@
+# Giulia Zobrist
+
+> Personal website and portfolio of Giulia Zobrist.
+
+## Pages
+- [Home](https://giuliazobrist.github.io/): Main portfolio page
+
+## About
+Personal portfolio website built with HTML, hosted on GitHub Pages.

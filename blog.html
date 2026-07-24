@@ -1,0 +1,25 @@
+---
+layout: default
+title: Writing — Giulia Zobrist
+description: Notes and writing by Giulia Zobrist.
+---
+<div class="page-head">
+  <h1>Writing</h1>
+</div>
+
+<div class="entries">
+  {% for post in site.posts %}
+  <details class="entry"{% if forloop.first %} open{% endif %}>
+    <summary>
+      <span class="entry-title">{{ post.title }}</span>
+      <span class="entry-meta">
+        <span class="entry-date">{{ post.date | date: "%-d %b %Y" }}</span>
+        <span class="entry-chevron">↓</span>
+      </span>
+    </summary>
+    <div class="entry-body">
+      {{ post.content }}
+    </div>
+  </details>
+  {% endfor %}
+</div>

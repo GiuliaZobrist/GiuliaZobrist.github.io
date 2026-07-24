@@ -34,3 +34,11 @@ dist/
 
 # Build / generated
 node_modules/
+
+# Jekyll
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.bundle/
+vendor/
+Gemfile.lock

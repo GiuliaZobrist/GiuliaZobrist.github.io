@@ -21,9 +21,11 @@ or type sizes except at the system boundary (border widths, outline offsets).
 
 ### Measure (Line Length)
 
-Optimal reading line: **45–75 characters**. Enforced via `max-width: 58ch` on body
-paragraphs. The column (`--col: 720px`) is wider to allow headings and decorative
-elements to breathe; body text is constrained inside it.
+Body paragraphs are no longer capped at a narrower reading measure — they run the
+full width of the column (`--col: 800px`). An earlier version enforced
+`max-width: 58ch` on paragraph text, but that left a large empty gutter on wide
+viewports once cards and blog entries filled the same column, so the cap was
+dropped site-wide (chapters, blog entries/posts, project cards).
 
 ### Leading (Line Height)
 
@@ -34,8 +36,8 @@ a single fixation, not line by line.
 
 ### Tracking (Letter Spacing)
 
-- Large display text (blockquote): slight negative tracking (`-0.015em`) — large
-  glyphs naturally space too wide optically.
+- Large display text (opening `h1`, project-card `h3`): slight negative tracking
+  (`-0.01em`) — large glyphs naturally space too wide optically.
 - Headings (h2): slight negative tracking (`-0.01em`).
 - Small all-caps labels: positive tracking (`+0.12em`) — tight all-caps is
   illegible; open tracking compensates.
@@ -53,8 +55,11 @@ Based on a **Major Third** ratio (×1.25):
 | `--t-base` | 1       | 17      | body copy                    |
 | `--t-md`   | 1.125   | 19.1    | h2                           |
 | `--t-lg`   | 1.25    | 21.25   | contact email                |
-| `--t-xl`   | 1.563   | 26.6    | blockquote min               |
-| `--t-2xl`  | 2.25    | 38.25   | blockquote max               |
+
+The opening `h1` and project-card details aren't on named tokens — they use
+`clamp()` directly (e.g. `clamp(2rem, 5.5vw, 3.2rem)` for the opening name) since
+their size is meant to respond continuously to viewport width, not step between
+fixed sizes.
 
 ### Spacing Scale
 
@@ -67,7 +72,7 @@ step between levels:
 | `--sp-2` | 1    | 17      | inline margins, figcaption            |
 | `--sp-3` | 1.5  | 25.5    | label→content, h2→body, list gaps     |
 | `--sp-4` | 2    | 34      | tags row, nav gap                     |
-| `--sp-5` | 2.5  | 42.5    | nav/wrap padding, cite margin         |
+| `--sp-5` | 2.5  | 42.5    | nav/wrap padding, opening icon gap    |
 | `--sp-6` | 4.5  | 76.5    | medium section padding (sankey)       |
 | `--sp-7` | 5    | 85      | standard section padding (chapters)   |
 | `--sp-8` | 6    | 102     | generous section padding (opening)    |
@@ -122,5 +127,7 @@ should stay so.
 - Computer Modern Sans — central to the identity.
 - The warm background/ink palette.
 - `line-height: 1.8` on body — the airiness is intentional.
-- The `58ch` paragraph measure.
 - Negative tracking on display text.
+- The opening's branch-mark SVG (a small line-and-dot glyph nodding to the
+  family-tree work in "Where my roots are") paired with the name and a
+  four-item tagline row — this replaced the earlier italic blockquote.

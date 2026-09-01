@@ -13,4 +13,3 @@ exclude:
   - vendor
   - CONTEXT.md
   - TODO.md
-  - JEKYLL_SETUP.md

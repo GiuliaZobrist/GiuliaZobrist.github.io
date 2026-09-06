@@ -125,14 +125,6 @@ description: Product owner, ETH engineer, Zürich. Inspects curiosity through pe
               (function () {
                 var box = document.getElementById("statues");
 
-                // The card opens only via the #statues link — clicking the
-                // summary can close it but not open it.
-                if (box) {
-                  box.querySelector("summary").addEventListener("click", function (e) {
-                    if (!box.open) e.preventDefault();
-                  });
-                }
-
                 // Load Strava's embed script only once, the first time the card
                 // is opened. Running it while the card is display:none makes it
                 // render the iframes at zero width, and it never re-runs.

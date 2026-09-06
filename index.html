@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Giulia Zobrist
+title: Giulia Zobrist - Homepage
 description: >-
   Giulia Zobrist — mechanical engineer and AI builder based in Zürich. Product
   owner at SBB. Builds AI agents for personal data and automation.
@@ -86,28 +86,117 @@ description: >-
       </div>
 
       </div><!-- /.projects-grid -->
-        <p>Most days I run, boulder or swim.
-        Weekends find me in an European city with a magazine, at the cinema, or in the Swiss Alps.
-        Occasionally at the seaside, watching the marine life.
-        In July 2026 I started <a href="/blog/">writing here</a>.</p>
-        <p>During my runs my photographic eye awakens and sometimes I post a few pictures.</p>
+        <p>Most days I run, boulder, or swim. 
+        During my runs I sometimes <a href="#statues">photograph statues or architecture</a> and post them to Strava.
+        Weekends find me in an European city with a magazine or with my laptop, at the cinema, or in the Swiss Alps.
+        Occasionally I am by the seaside, observing the marine life.
+        In July 2026, I wrote my first <a href="/blog/">blog</a> entry.
+        </p>
+
         <div class="strava-embed-wrap">
-          <div class="strava-embed-placeholder" data-embed-type="activity" data-embed-id="19972522066" data-style="standard" data-from-embed="false" data-token="LBagL425K1y8JYWTWz9X7diJmAh_LBxpIoK5MOjc2O8"></div>
-          <script src="https://strava-embeds.com/embed.js"></script>
+          <details id="statues">
+            <summary>
+              <div class="project-card-thumb-wrap">
+                <img
+                  class="project-card-thumb"
+                  src="/assets/runs/hero.png"
+                  alt="Head of a bronze statue against a blue sky"
+                />
+              </div>
+              <h3>Statues while running</h3>
+              <span class="project-card-chevron">↓</span>
+            </summary>
+            <div class="strava-carousel">
+              <button type="button" class="strava-nav strava-nav-prev" aria-label="Previous activity">←</button>
+              <div class="strava-strip">
+                {% for run in site.data.runs %}
+                <figure class="strava-slide">
+                  <div class="strava-embed-placeholder"
+                       data-embed-type="activity"
+                       data-embed-id="{{ run.id }}"
+                       data-style="standard"
+                       data-from-embed="false"
+                       data-token="{{ run.token }}"></div>
+                  <figcaption>{{ run.description }}{% if run.place %} · <span>{{ run.place }}</span>{% endif %}</figcaption>
+                </figure>
+                {% endfor %}
+              </div>
+              <button type="button" class="strava-nav strava-nav-next" aria-label="Next activity">→</button>
+            </div>
+            <script>
+              (function () {
+                var box = document.getElementById("statues");
+
+                // The card opens only via the #statues link — clicking the
+                // summary can close it but not open it.
+                if (box) {
+                  box.querySelector("summary").addEventListener("click", function (e) {
+                    if (!box.open) e.preventDefault();
+                  });
+                }
+
+                // Load Strava's embed script only once, the first time the card
+                // is opened. Running it while the card is display:none makes it
+                // render the iframes at zero width, and it never re-runs.
+                var embedsRequested = false;
+                function loadEmbeds() {
+                  if (embedsRequested) return;
+                  embedsRequested = true;
+                  var s = document.createElement("script");
+                  s.src = "https://strava-embeds.com/embed.js";
+                  s.onload = function () { window.dispatchEvent(new Event("resize")); };
+                  document.body.appendChild(s);
+                }
+                if (box) box.addEventListener("toggle", function () {
+                  if (box.open) loadEmbeds();
+                });
+
+                // Opens only on an actual click of a #statues link — never
+                // on page load, even if the URL already carries the hash.
+                function reveal() {
+                  if (!box) return;
+                  box.open = true;
+                  loadEmbeds();
+                  box.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+                document.querySelectorAll('a[href="#statues"]').forEach(function (a) {
+                  a.addEventListener("click", reveal);
+                });
+
+                document.querySelectorAll(".strava-carousel").forEach(function (car) {
+                  var strip = car.querySelector(".strava-strip");
+                  var prev  = car.querySelector(".strava-nav-prev");
+                  var next  = car.querySelector(".strava-nav-next");
+                  var slides = strip.querySelectorAll(".strava-slide");
+                  if (slides.length < 2) { car.querySelectorAll(".strava-nav").forEach(function (b) { b.remove(); }); return; }
+
+                  var idx = 0;
+                  function go(i) {
+                    idx = Math.max(0, Math.min(slides.length - 1, i));
+                    strip.scrollTo({ left: slides[idx].offsetLeft - slides[0].offsetLeft, behavior: "smooth" });
+                    prev.disabled = idx === 0;
+                    next.disabled = idx === slides.length - 1;
+                  }
+                  function browse(i) { car.classList.add("is-browsing"); go(i); }
+                  prev.addEventListener("click", function () { browse(idx - 1); });
+                  next.addEventListener("click", function () { browse(idx + 1); });
+                  window.addEventListener("resize", function () { go(idx); });
+                  go(0);
+                });
+              }());
+            </script>
+          </details>
         </div>
     </div>
   </div>
   <div class="chapter" id="roots">
     <div class="chapter-body">
       <h2>Where my roots are</h2>
-      <p>LaTeX was my first encounter with code. Writing physics summaries, I appreciated the rigour in the source and the clean typographic look in the output. 
+      <p>LaTeX was my first encounter with code. Writing physics summaries, I appreciated the rigour in the source and the clean typographic look in the output. </p>
+      <!-- 
+      <p>
         When the first hand-written version of my mother's family tree arrived, with branches back five generations in California and Ticino, translating it to LaTeX was the obvious choice. 
         Every now and then an unknown relative knocks on my grandfather's door. The tree keeps growing.</p>
-      <!-- tags: re-enable and add links once relevant projects are public
-      <div class="tags">
-        <span class="tag">LaTeX</span>
-        <span class="tag">Genealogy</span>
-      </div>
       -->
       <p>I studied Mechanical Engineering at ETH Zürich.
         I appreciate when mathematics has a direct application in real life. 
@@ -119,10 +208,10 @@ description: >-
 <div class="contact" id="contact">
   <p class="contact-label">Contact</p>
 
-  <a class="contact-email" href="mailto:zobristg@gmail.com">zobristg@gmail.com</a>
-
+  <a class="contact-email" href="https://www.linkedin.com/in/giulia-zobrist" target="_blank" rel="noopener">Happy to receive your message on LinkedIn</a>
+  <!--
   <ul class="contact-links">
     <li><a href="https://github.com/GiuliaZobrist" target="_blank" rel="noopener">GitHub</a></li>
-    <li><a href="https://www.linkedin.com/in/giulia-zobrist" target="_blank" rel="noopener">LinkedIn</a></li>
   </ul>
+  -->
 </div>

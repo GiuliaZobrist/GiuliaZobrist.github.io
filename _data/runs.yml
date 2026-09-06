@@ -1,0 +1,28 @@
+# Strava activities shown in the "On the run" card on the homepage.
+#
+# Each entry needs:
+#   id          – the Strava activity id (the number in the activity URL)
+#   token       – the embed token from Strava's "Share > Embed" dialog for
+#                 that activity (I can't retrieve this — paste it here)
+#   place       – where the run was (free text, shown as a caption)
+#   description – one line, written by you
+#
+- id: "19972522066"
+  token: "LBagL425K1y8JYWTWz9X7diJmAh_LBxpIoK5MOjc2O8"
+  place: "Copenhagen, DK"
+  description: "Mermaid & co."
+
+- id: "19862811440"
+  token: "IY8uyRvKdwurKfa3miysoeWZl28V8p9CZtLvMzmS5Fc"
+  place: "Baden, CH"
+  description: "Long Limmat run."
+
+- id: "16616508990"
+  token: "45jU4jPmNTl8lBVhO5hvzL-5DjSj5crZZI8ndJalazI"
+  place: "Paris, FR"
+  description: "Recovering from the marathon."
+
+- id: "16168736788"
+  token: "sKfXHV0QBa7cnV66lu-hMDHBOWdCgRTtGjbEazkDtaY"
+  place: "London, UK"
+  description: "Longest run of the block."

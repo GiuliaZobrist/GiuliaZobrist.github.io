@@ -316,16 +316,122 @@
     }
     .project-link:hover { border-color: var(--sage); }
 
-    /* ── Strava embed ── */
+    /* ── Strava embed ──
+       The official widget ships loud orange branding and a bright map.
+       House it in the same card shell as the project cards and tone the
+       iframe down: desaturated and dimmed until hover. */
     .strava-embed-wrap {
-      display: flex;
-      justify-content: center;
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      padding: var(--sp-3);
       margin-top: var(--sp-4);
     }
 
-    .strava-embed-wrap iframe {
-      border-radius: 10px;
+    .strava-embed-wrap details summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3);
+    }
+    .strava-embed-wrap details summary::-webkit-details-marker { display: none; }
+
+    /* the statue's head sits ~40% down the source image */
+    .strava-embed-wrap .project-card-thumb { object-position: center 38%; }
+
+    .strava-embed-wrap h3 {
+      flex: 1;
+      min-width: 0;
+      font-size: var(--t-md);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    .strava-embed-wrap details[open] .project-card-chevron { transform: rotate(180deg); }
+
+    .strava-embed-wrap .project-card-desc { margin-top: var(--sp-3); }
+
+    /* Carousel — strip of slides flanked by left/right nav buttons. */
+    .strava-carousel {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+    }
+    .strava-carousel .strava-strip { flex: 1; min-width: 0; }
+
+    /* Horizontal strip — one slide per activity, scroll-snapped.
+       Scrollbar hidden; navigation is via the arrow buttons. */
+    .strava-strip {
+      display: flex;
+      gap: var(--sp-3);
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .strava-strip::-webkit-scrollbar { display: none; }
+
+    .strava-nav {
+      flex-shrink: 0;
+      width: 2rem;
+      height: 2rem;
+      border: 1px solid var(--rule);
+      border-radius: 50%;
+      background: var(--bg);
+      color: var(--muted);
+      font-size: var(--t-base);
+      line-height: 1;
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .strava-nav:hover:not(:disabled) { color: var(--sage); border-color: var(--sage); }
+    .strava-nav:disabled { opacity: 0.3; cursor: default; }
+
+    .strava-slide {
+      flex: 0 0 100%;
+      max-width: 100%;
+      scroll-snap-align: start;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    /* keep the embed compact and centred rather than full-width;
+       fix the height so every activity sits at the same position */
+    .strava-slide .strava-embed-placeholder,
+    .strava-slide iframe {
+      width: 100%;
+      max-width: 340px;
+      height: 405px;
+    }
+
+    .strava-slide figcaption {
+      margin-top: var(--sp-1);
+      font-size: var(--t-sm);
+      color: var(--muted);
+      text-align: center;
+    }
+    .strava-slide figcaption span { font-style: italic; }
+
+    .strava-strip iframe {
+      display: block;
+      border-radius: 8px;
       overflow: hidden;
+      filter: grayscale(0.5) saturate(0.8) opacity(0.8);
+      transition: filter 0.3s;
+    }
+
+    /* Full colour when the pointer is over the activity, or while the
+       reader is moving through the carousel (hovering it / just used an
+       arrow — JS adds .is-browsing). */
+    .strava-strip iframe:hover,
+    .strava-carousel:hover .strava-strip iframe,
+    .strava-carousel.is-browsing .strava-strip iframe {
+      filter: grayscale(0) saturate(1) opacity(1);
     }
 
     /* ── Blog: entries page (list + expand) ── */
@@ -533,7 +639,7 @@
 
     <footer>
       <p>© 2026 Giulia Zobrist, built with &hearts;
-         using Claude Code &times; Sonnet 4.6. <br>
+         using Claude Code &times; Sonnet <br>
          Watercolors by Giulia Zobrist.</p>
     </footer>
   </div>

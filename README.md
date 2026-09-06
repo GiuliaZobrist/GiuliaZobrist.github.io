@@ -1,14 +1,16 @@
 # Personal website
 
-Source for [giuliazobrist.github.io](https://giuliazobrist.github.io) — a Jekyll
-site on GitHub Pages.
+Source for [giuliazobrist.github.io](https://giuliazobrist.github.io), a Jekyll site on GitHub Pages.
 
 ## Structure
 
 - `index.html`, `blog.html` — pages with YAML front matter; share `_layouts/default.html`.
 - `_posts/` — posts as `YYYY-MM-DD-slug.md`; `blog.html` renders each as an expandable row.
 - `_layouts/post.html` — permalink page at `/blog/<slug>/` per post.
-- `assets/` — static files. `_config.yml` — config. `_site/` — build output.
+- `assets/` — static files. `_config.yml` — config.
+- `_site/` — build output, regenerated automatically by Jekyll on every build /
+  save. Never edit it by hand; changes there are overwritten. It is not the
+  source of truth and does not need to be committed.
 
 ## Local preview
 
@@ -23,7 +25,11 @@ Then from the repo root:
 
 ```sh
 bundle install
-bundle exec jekyll serve --livereload   # http://localhost:4000, rebuilds on save
+bundle exec jekyll serve --livereload  # http://localhost:4000, rebuilds on save
+```
+Hides build erros with
+```sh
+bundle exec jekyll serve --livereload 2>/dev/null
 ```
 
 ## Add a post
@@ -44,8 +50,7 @@ Newest sorts first and opens by default; older ones collapse.
 
 ## Deploy
 
-Push to `main` — GitHub Pages builds Jekyll natively (its own pinned version; the
-`Gemfile` is ignored server-side). No non-core plugins, so no compatibility risk.
+Push to `main` — GitHub Pages builds Jekyll natively (its own ``_site` version).
 
 ```sh
 git add . && git commit -m "…" && git push

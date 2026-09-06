@@ -13,3 +13,5 @@ exclude:
   - vendor
   - CONTEXT.md
   - TODO.md
+  - AGENTS.md
+  - README.md

@@ -1,11 +1,12 @@
 title: Giulia Zobrist
-description: >-
-  Giulia Zobrist — mechanical engineer and AI builder based in Zürich.
-  Product owner at SBB. Builds AI agents for personal data and automation.
+description: Product owner, ETH engineer, Zürich. Inspects curiosity through personal AI projects.
 url: "https://giuliazobrist.github.io"
 
 markdown: kramdown
 permalink: /blog/:title/
+
+plugins:
+  - jekyll-sitemap
 
 exclude:
   - Gemfile

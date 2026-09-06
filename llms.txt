@@ -1,9 +1,12 @@
 # Giulia Zobrist
 
-> Personal website and portfolio of Giulia Zobrist.
+> Product owner, ETH engineer, Zürich. Inspects curiosity through personal AI projects.
 
 ## Pages
-- [Home](https://giuliazobrist.github.io/): Main portfolio page
+- [Home](https://giuliazobrist.github.io/): About Giulia, her work as a product owner at SBB, and personal AI projects
+- [Writing](https://giuliazobrist.github.io/blog/): Notes on AI projects and cerebral moments worth thinking through
 
 ## About
-Personal portfolio website built with HTML, hosted on GitHub Pages.
+Giulia Zobrist is a product owner at the Swiss Federal Railways (SBB), working with her team on computer-vision systems for automated train inspection. She holds an engineering degree from ETH Zürich. In her free time she builds AI agents for personal data and automation — interrogating years of Garmin training data, automating repetitive tasks, and organizing her knowledge notes. Some projects are public on GitHub (https://github.com/GiuliaZobrist).
+
+Personal website built with Jekyll, hosted on GitHub Pages.

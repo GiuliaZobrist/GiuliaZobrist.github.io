@@ -1,0 +1,20 @@
+{%- comment -%}
+  One film row. Usage: {% include films-row.html e=entry datefmt="%d.%m." %}
+  Ratings run 0.5–5.0: 4.5 renders as ★★★★½. Tags are deliberately not shown
+  (they contain personal "w-<name>" tags). Review text is not shown either, only an icon.
+{%- endcomment -%}
+{%- assign e = include.e -%}
+<li class="films-row">
+  <span class="films-date">{{ e.watched | date: include.datefmt }}</span>
+  <span>
+    <a class="films-title" href="{{ e.url }}" target="_blank" rel="noopener">{{ e.title }}</a><span class="films-year">{{ e.year }}</span>
+    {%- if e.liked %}<span class="films-mark" title="Liked" aria-label="Liked">♥</span>{% endif -%}
+    {%- if e.rewatch %}<span class="films-mark" title="Rewatch" aria-label="Rewatch">↺</span>{% endif -%}
+  </span>
+  <span class="films-rating">
+    {%- if e.rating %}{% assign full = e.rating | floor -%}
+    <span class="films-stars" role="img" aria-label="{{ e.rating }} out of 5">{% for i in (1..full) %}★{% endfor %}{% assign rest = e.rating | minus: full %}{% if rest > 0 %}½{% endif %}</span>
+    {%- endif %}
+    {%- if e.review %}<svg class="films-note" viewBox="0 0 16 16" role="img" aria-label="Has a written review" focusable="false"><title>Has a written review</title><path d="M2.5 3h11a1 1 0 0 1 1 1v6.5a1 1 0 0 1-1 1H8L4.5 14v-2.5h-2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>{% endif -%}
+  </span>
+</li>

@@ -16,3 +16,7 @@ exclude:
   - TODO.md
   - AGENTS.md
   - README.md
+  - PLAN.md
+  - scripts
+  - tests
+  - tmp

@@ -45,15 +45,15 @@ description: Product owner, ETH engineer, Zürich. Inspects curiosity through pe
       <div class="project-card">
         <details>
           <summary>
-            <div class="project-card-thumb-wrap">
+            <div class="card-thumb-wrap">
               <img
-                class="project-card-thumb"
+                class="card-thumb"
                 src="/assets/github-projects/obsidian-tree-total.png"
                 alt="Obsidian graph view of cleanup-safari-tabs vault"
               />
             </div>
             <h3>cleanup-safari-tabs</h3>
-            <span class="project-card-chevron">↓</span>
+            <span class="card-chevron">↓</span>
           </summary>
 
           <p class="project-card-desc">Save your open Safari tabs in an Obsidian tree with clustering done by Claude.</p>
@@ -85,24 +85,20 @@ description: Product owner, ETH engineer, Zürich. Inspects curiosity through pe
 
       </div><!-- /.projects-grid -->
         <p>Most days I run, boulder, or swim. 
-        During my runs I sometimes <a href="#statues">photograph statues or architecture</a> and post them to Strava.
-        Weekends find me in an European city with a magazine or with my laptop, at the cinema, or in the Swiss Alps.
-        Occasionally I am by the seaside, observing the marine life.
-        In July 2026, I wrote my first <a href="/blog/">blog</a> entry.
+        During my runs I sometimes <a href="#statues">photograph statues or architecture</a> and post them.
         </p>
-
-        <div class="strava-embed-wrap">
+        <div class="strava-embed-wrap expander">
           <details id="statues">
             <summary>
-              <div class="project-card-thumb-wrap">
+              <div class="card-thumb-wrap">
                 <img
-                  class="project-card-thumb"
+                  class="card-thumb"
                   src="/assets/runs/hero.png"
                   alt="Head of a bronze statue against a blue sky"
                 />
               </div>
-              <h3>Statues while running</h3>
-              <span class="project-card-chevron">↓</span>
+              <h3>Statues while running<small>Logged on Strava</small></h3>
+              <span class="card-chevron">↓</span>
             </summary>
             <div class="strava-carousel">
               <button type="button" class="strava-nav strava-nav-prev" aria-label="Previous activity">←</button>
@@ -177,6 +173,55 @@ description: Product owner, ETH engineer, Zürich. Inspects curiosity through pe
             </script>
           </details>
         </div>
+
+        <p>
+        Weekends find me in a European city with a magazine or with my laptop, in the Swiss Alps, or at the <a href="#films">cinema</a>. Since summer 2025 I've been logging the films I watch, more or less consistently.
+        </p>
+
+        {% assign films = site.data.films.entries %}
+        {% assign film_years = films | group_by_exp: "e", "e.watched | slice: 0, 4" %}
+        <div class="films-card expander">
+          <details id="films">
+            <summary>
+              <div class="card-thumb-wrap">
+                <img
+                  class="card-thumb"
+                  src="/assets/films/hero.svg"
+                  alt="Yellow and black leopard-style pattern"
+                />
+              </div>
+              <h3>Films<small>Logged on Letterboxd</small></h3>
+              <span class="card-chevron">↓</span>
+            </summary>
+            <div class="films-scroll" tabindex="0" role="region" aria-label="Films I watched, newest first">
+              <div class="films-head" aria-hidden="true"><span>Watch date</span><span>Film title (year)</span><span>Personal review</span></div>
+              {% for y in film_years %}
+              <p class="films-year">{{ y.name }}</p>
+              <ul class="films-list">
+                {% for e in y.items %}{% include films-row.html e=e datefmt="%d.%m." %}{% endfor %}
+              </ul>
+              {% endfor %}
+            </div>
+            <p class="films-credit">Thumbnail: own illustration, inspired by the yellow-and-black look of the Locarno Film Festival 2021.</p>
+            <script>
+              (function () {
+                var box = document.getElementById("films");
+                // Like #statues: opens only on a click of a #films link, never on load.
+                document.querySelectorAll('a[href="#films"]').forEach(function (a) {
+                  a.addEventListener("click", function () {
+                    box.open = true;
+                    box.scrollIntoView({ behavior: "smooth", block: "start" });
+                  });
+                });
+              }());
+            </script>
+          </details>
+        </div>
+
+        <p>
+        Occasionally I am by the seaside, observing the marine life.
+        In July 2026, I wrote my first <a href="/blog/">blog</a> entry.
+        </p>
     </div>
   </div>
   <div class="chapter" id="roots">

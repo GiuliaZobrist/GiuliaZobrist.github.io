@@ -50,7 +50,7 @@ Implementation notes (all in `index.html` + `_layouts/default.html`):
 - `https://strava-embeds.com/embed.js` is loaded lazily the first time the card
   opens — running it while the card is `display:none` renders the iframes at
   zero width, and it never re-runs.
-- Classes: `.strava-embed-wrap` (card shell), `.strava-carousel` (flex row:
+- Classes: `.strava-embed-wrap` (the card; its shell comes from the shared `.expander` class, also used by the films card), `.strava-carousel` (flex row:
   arrow / strip / arrow), `.strava-strip` (scroll container, scrollbar hidden),
   `.strava-slide` (one activity + `figcaption`), `.strava-nav` (round arrow
   buttons — removed when fewer than 2 activities).

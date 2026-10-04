@@ -45,15 +45,15 @@ description: Product owner, ETH engineer, Zürich. Inspects curiosity through pe
       <div class="project-card">
         <details>
           <summary>
-            <div class="project-card-thumb-wrap">
+            <div class="card-thumb-wrap">
               <img
-                class="project-card-thumb"
+                class="card-thumb"
                 src="/assets/github-projects/obsidian-tree-total.png"
                 alt="Obsidian graph view of cleanup-safari-tabs vault"
               />
             </div>
             <h3>cleanup-safari-tabs</h3>
-            <span class="project-card-chevron">↓</span>
+            <span class="card-chevron">↓</span>
           </summary>
 
           <p class="project-card-desc">Save your open Safari tabs in an Obsidian tree with clustering done by Claude.</p>
@@ -87,18 +87,18 @@ description: Product owner, ETH engineer, Zürich. Inspects curiosity through pe
         <p>Most days I run, boulder, or swim. 
         During my runs I sometimes <a href="#statues">photograph statues or architecture</a> and post them.
         </p>
-        <div class="strava-embed-wrap">
+        <div class="strava-embed-wrap expander">
           <details id="statues">
             <summary>
-              <div class="project-card-thumb-wrap">
+              <div class="card-thumb-wrap">
                 <img
-                  class="project-card-thumb"
+                  class="card-thumb"
                   src="/assets/runs/hero.png"
                   alt="Head of a bronze statue against a blue sky"
                 />
               </div>
               <h3>Statues while running<small>Logged on Strava</small></h3>
-              <span class="project-card-chevron">↓</span>
+              <span class="card-chevron">↓</span>
             </summary>
             <div class="strava-carousel">
               <button type="button" class="strava-nav strava-nav-prev" aria-label="Previous activity">←</button>
@@ -180,18 +180,18 @@ description: Product owner, ETH engineer, Zürich. Inspects curiosity through pe
 
         {% assign films = site.data.films.entries %}
         {% assign film_years = films | group_by_exp: "e", "e.watched | slice: 0, 4" %}
-        <div class="films-card">
+        <div class="films-card expander">
           <details id="films">
             <summary>
-              <div class="project-card-thumb-wrap">
+              <div class="card-thumb-wrap">
                 <img
-                  class="project-card-thumb"
+                  class="card-thumb"
                   src="/assets/films/hero.svg"
                   alt="Yellow and black leopard-style pattern"
                 />
               </div>
               <h3>Films<small>Logged on Letterboxd</small></h3>
-              <span class="project-card-chevron">↓</span>
+              <span class="card-chevron">↓</span>
             </summary>
             <div class="films-scroll" tabindex="0" role="region" aria-label="Films I watched, newest first">
               <div class="films-head" aria-hidden="true"><span>Watch date</span><span>Film title (year)</span><span>Personal review</span></div>

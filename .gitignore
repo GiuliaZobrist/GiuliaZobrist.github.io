@@ -1,6 +1,11 @@
 # Assets — only floating-elements/published/ is tracked
 assets/floating-elements/processed
 assets/floating-elements/raw
+INSPIRATION.md
+
+# Private data exports (Letterboxd export holds email, watchlist, …) — never commit
+tmp/
+import/
 
 # macOS
 .DS_Store

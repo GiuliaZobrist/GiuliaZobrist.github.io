@@ -56,3 +56,18 @@ Implementation notes (all in `index.html` + `_layouts/default.html`):
   buttons — removed when fewer than 2 activities).
 - An inline script tracks the slide index, scrolls the strip on arrow clicks,
   and disables each arrow at its end of the range.
+
+## Films — Letterboxd
+
+`_data/films.json` is the store (see `PLAN.md`). Don't hand-edit it except to
+remove an entry deleted on Letterboxd; scripts own the file.
+
+- History was imported once (2026-10) from a Letterboxd data export. That export
+  contains private data (email, watchlist): keep it in `tmp/` (gitignored and
+  excluded from Jekyll), never commit it. Updates come from the public RSS feed
+  (see `PLAN.md`, Tasks 1 to 4).
+- Rendered by `_includes/films-row.html`, used by the `#films` card in
+  `index.html`. CSS is the `.films-*` block in
+  `_layouts/default.html`.
+- Never render `tags`, and never commit `w-<name>` tags: they name other people.
+

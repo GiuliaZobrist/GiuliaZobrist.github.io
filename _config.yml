@@ -13,10 +13,11 @@ exclude:
   - Gemfile.lock
   - vendor
   - CONTEXT.md
-  - TODO.md
+  - BACKLOG.md
   - AGENTS.md
   - README.md
   - PLAN.md
+  - LEARNING_NOTES.md
   - scripts
   - tests
   - tmp

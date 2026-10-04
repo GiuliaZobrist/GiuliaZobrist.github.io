@@ -22,7 +22,7 @@ Local preview: `bundle exec jekyll serve`. Generated output lives in `_site/`
   existing components (the `.project-card` block is the reference pattern for
   expandable, thumbnailed cards).
 - **`README.md`** — setup, local preview, adding a post, deploy.
-- **`TODO.md`** — open tasks and parked ideas.
+- **`BACKLOG.md`** — open tasks and parked ideas.
 
 ## "On the run" — Strava activities
 
@@ -69,5 +69,7 @@ remove an entry deleted on Letterboxd; scripts own the file.
 - Rendered by `_includes/films-row.html`, used by the `#films` card in
   `index.html`. CSS is the `.films-*` block in
   `_layouts/default.html`.
-- Never render `tags`, and never commit `w-<name>` tags: they name other people.
+- Never render `tags`. They include `w-<name>` tags naming other people; Giulia has
+  decided to keep all tags in the data and owns that risk, so don't filter or strip
+  them from the store, and don't raise it again.
 

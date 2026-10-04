@@ -1,4 +1,4 @@
-# TODO
+# Backlog
 
 ## Content
 
@@ -11,3 +11,9 @@
 ## Strava
 
 - [ ] **low priority**: Custom card to embed Strava iframe. How it works: at build time, a scheduled GitHub Action calls the API, writes `_data/runs.json`, a Liquid template renders it in the site's own type/palette. One-time: register a Strava app, run the OAuth handshake once, add repo secrets; the workflow must write Strava's rotating refresh token back to a secret each run. ~60 lines total. Only worth it if the design becomes annoying.
+
+## GitHub projects
+
+- [ ] **idea**: Automate listing my public GitHub projects instead of hand-writing them in `index.html`. 
+(!) I tried to solve this issue already in my-skills with presentable-readme.
+Approach (as in [Expedia Group's open source site](https://medium.com/expedia-group-tech/building-the-expedia-group-open-source-site-fbdb8764dfe9)): a scheduled GitHub Action queries the GitHub GraphQL API for repository info (name, description, topics, language, stars, last push), writes `_data/repos.json`, and a Liquid template renders it in the site's own style (reuse the `.project-card` pattern). Same fetch-commit-rebuild flow as the Letterboxd Action, so reuse its workflow shape. Decide first: which repos to include (e.g. an opt-in topic like `showcase`, or an allowlist in `_data/`), and exclude forks and archived repos. The built-in `GITHUB_TOKEN` is enough for public data, so no secrets to set up. 

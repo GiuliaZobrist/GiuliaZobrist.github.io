@@ -2,6 +2,7 @@
 assets/floating-elements/processed
 assets/floating-elements/raw
 INSPIRATION.md
+LEARNING_NOTES.md
 
 # Private data exports (Letterboxd export holds email, watchlist, …) — never commit
 tmp/

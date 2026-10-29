@@ -24,6 +24,14 @@ Local preview: `bundle exec jekyll serve`. Generated output lives in `_site/`
 - **`README.md`** — setup, local preview, adding a post, deploy.
 - **`TODO.md`** — open tasks and parked ideas.
 
+## Project cards
+
+Cards in "What I do as well" render from `_data/projects.yml` through
+`_includes/project-card.html` (looped in `index.html`). To add or edit a project,
+edit the YAML only (fields are documented at the top of the file) and put images
+in `assets/github-projects/`. Markup follows the `.project-card` CSS in
+`_layouts/default.html`.
+
 ## "On the run" — Strava activities
 
 The homepage shows a collapsed card (`<details id="statues">`, opened only via

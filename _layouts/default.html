@@ -302,6 +302,39 @@
       border: 1px solid var(--rule);
     }
 
+    /* click a round image to see it larger, still round */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      max-height: none;
+      margin: 0;
+      border: 0;
+      padding: 0;
+      background: none;
+      overflow: hidden;
+    }
+    .lightbox[open] { display: grid; place-items: center; }
+    .lightbox::backdrop {
+      background: rgba(250, 249, 246, 0.85);
+      backdrop-filter: blur(4px);
+    }
+    .lightbox img {
+      display: block;
+      width: min(85vmin, 36rem);
+      height: min(85vmin, 36rem);
+      max-width: none;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--rule);
+      animation: lightbox-in 0.15s ease-out;
+    }
+    @keyframes lightbox-in {
+      from { opacity: 0; transform: scale(0.92); }
+    }
+
     .project-card ul {
       padding-left: 1.2em;
       color: var(--muted);
@@ -683,6 +716,25 @@
       .films-head { grid-template-columns: 1fr 6.5rem; }
       .films-head span:first-child { display: none; }
       .films-date { grid-column: 1 / -1; }
+
+      /* Strava: with side arrows the widget gets ~140px and its contents
+         overlap. Let the card use more of the screen, put the arrows under
+         the strip, and give the widget the full width (swiping works too). */
+      .strava-embed-wrap {
+        margin-left: calc(-1 * var(--sp-3));
+        margin-right: calc(-1 * var(--sp-3));
+        padding: var(--sp-2);
+      }
+      .strava-carousel { flex-wrap: wrap; justify-content: center; }
+      .strava-carousel .strava-strip { order: -1; flex: 0 0 100%; }
+      .strava-strip { gap: var(--sp-2); }
+      .strava-slide .strava-embed-placeholder,
+      .strava-slide iframe { max-width: 100%; }
+    }
+
+    /* touch screens have no hover: show the embeds in full colour */
+    @media (hover: none) {
+      .strava-strip iframe { filter: none; }
     }
   </style>
 <meta name="google-site-verification" content="YLnQRTUQBSdYOQVqJaaC3rkPJ0RJwAkH2GB8Wjn1vEc" />
@@ -800,6 +852,32 @@
       .attr("y", d => (d.y0 + d.y1) / 2)
       .attr("dy", "0.35em")
       .text(d => d.name);
+  }());
+  </script>
+
+  <dialog class="lightbox" id="lightbox"><img alt=""></dialog>
+  <script>
+  (function () {
+    const box = document.getElementById('lightbox');
+    const big = box.querySelector('img');
+    const show = img => {
+      big.src = img.src;
+      big.alt = img.alt;
+      big.style.objectPosition = getComputedStyle(img).objectPosition;
+      box.showModal();
+    };
+    document.querySelectorAll('.project-card-images img').forEach(img => {
+      img.addEventListener('click', () => show(img));
+    });
+    // on an open card the round thumbnail enlarges instead of collapsing the card
+    document.querySelectorAll('.project-card .card-thumb').forEach(img => {
+      img.addEventListener('click', e => {
+        if (!img.closest('details').open) return;
+        e.preventDefault();
+        show(img);
+      });
+    });
+    box.addEventListener('click', () => box.close());
   }());
   </script>
 

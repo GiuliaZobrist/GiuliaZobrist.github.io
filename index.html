@@ -35,53 +35,13 @@ description: Product owner, ETH engineer, Zürich. Inspects curiosity through pe
         <li>agents that automate time-consuming tasks, such as saving open Safari tabs.</li>
         <li>agents that deepen my skillset or organize my knowledge notes.</li>
       </ul>
-      <p>Some projects are public on <a href="https://github.com/GiuliaZobrist" target="_blank" rel="noopener">GitHub</a>, some have a presentation here.</p>
+      <p>Some projects have a presentation here.</p>
     </div>
     <div class="chapter-body">
       <div class="projects-grid">
-      <!-- project cards inserted here by /presentable-readme skill -->
-
-      <!-- Project card: cleanup-safari-tabs — generated 2026-06-13 -->
-      <div class="project-card">
-        <details>
-          <summary>
-            <div class="card-thumb-wrap">
-              <img
-                class="card-thumb"
-                src="/assets/github-projects/obsidian-tree-total.png"
-                alt="Obsidian graph view of cleanup-safari-tabs vault"
-              />
-            </div>
-            <h3>cleanup-safari-tabs</h3>
-            <span class="card-chevron">↓</span>
-          </summary>
-
-          <p class="project-card-desc">Save your open Safari tabs in an Obsidian tree with clustering done by Claude.</p>
-
-          <div class="tags">
-            <span class="tag">Python</span>
-            <span class="tag">Claude</span>
-            <span class="tag">AppleScript</span>
-            <span class="tag">Obsidian</span>
-          </div>
-
-          <div class="project-card-images">
-            <img src="/assets/github-projects/obsidian-tree-detail.png" alt="Obsidian graph detail with labeled tag nodes" />
-            <img src="/assets/github-projects/one-obsidian-note.png" alt="Single Obsidian note for a tag" />
-          </div>
-
-          <ul>
-            <li>Reads every open tab from Safari via AppleScript in one command</li>
-            <li>Claude invents tag names from the actual content — no preset categories</li>
-            <li>Stable tags persist across sessions; new tabs are appended, not buried</li>
-            <li>Sensitive data scrubbed from URLs before anything leaves your machine</li>
-          </ul>
-
-          <a class="project-link" href="https://github.com/GiuliaZobrist/cleanup-safari-tabs">
-            View on GitHub →
-          </a>
-        </details>
-      </div>
+      {% for project in site.data.projects %}
+        {% include project-card.html p=project %}
+      {% endfor %}
 
       </div><!-- /.projects-grid -->
         <p>Most days I run, boulder, or swim. 

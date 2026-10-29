@@ -1,0 +1,40 @@
+# Project cards for the "What I do as well" section. Rendered by
+# _includes/project-card.html. Newest first.
+# Images live in assets/github-projects/.
+#
+# - slug: folder name of the project, used as the key
+#   repo: GitHub URL; leave out for a private repo (no "View on GitHub" link)
+#   thumb: collapsed-state circle image (filename)
+#   alt: alt text for the thumbnail
+#   description: one sentence a non-technical person can understand
+#   tags: [..]
+#   images: optional pair of supporting images, [{src: file, alt: text}]
+#   features: bullet list, each starting with a verb
+
+- slug: albumi
+  #repo: "https://github.com/GiuliaZobrist/albumi"
+  thumb: albumi-map-low-res.png
+  alt: "albumi map: similar photos sit close together"
+  description: "You start with a pile of unsorted photos. albumi suggests folders for them, you review and decide, and your favourites become the plan for a physical photobook."
+  tags: [Python, open-clip, UMAP, Ollama]
+  features:
+    - "Suggests groups by mixing when each photo was taken with what it shows"
+    - "Lets you review the groups, regroup on a map, and pick favourites with captions, with every move undoable"
+    - "Structures your physical photobook for the page count and format you choose"
+    - "Uses a local model that sees only event titles and counts, never the photos"
+
+- slug: cleanup-safari-tabs
+  #repo: "https://github.com/GiuliaZobrist/cleanup-safari-tabs"
+  thumb: obsidian-tree-total.png
+  alt: "Obsidian graph view of cleanup-safari-tabs vault"
+  description: "Save your open Safari tabs in an Obsidian tree with clustering done by an LLM."
+  tags: [Python, LLM, AppleScript, Obsidian]
+  images:
+    - src: obsidian-tree-detail.png
+      alt: "Obsidian graph detail with labeled tag nodes"
+    - src: one-obsidian-note.png
+      alt: "Single Obsidian note for a tag"
+  features:
+    - "Reads every open tab from Safari via AppleScript in one command"
+    - "An LLM invents tag names from the actual content. No preset categories"
+    - "Stable tags persist across sessions. New tabs are appended"

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """One-time backfill of _data/films.json from a Letterboxd data export.
 
-    python3 scripts/import_csv.py tmp/letterboxd-lemongiu_cinema-…/
+    LETTERBOXD_USER=<name> python3 scripts/import_csv.py tmp/letterboxd-<name>-…/
 
 Reads diary.csv (required), reviews.csv and likes/films.csv (optional) from the
 export folder. Idempotent. Entries that already exist (same id) only get their
@@ -27,6 +27,7 @@ def rows(path):
 
 
 def main(folder):
+    user = filmslib.require_user()
     folder = Path(folder)
     diary = rows(folder / "diary.csv")
     if not diary:
@@ -37,6 +38,7 @@ def main(folder):
     likes = {(r["Name"], r["Year"]) for r in rows(folder / "likes" / "films.csv")}
 
     store = filmslib.load()
+    store["user"] = user
     by_id = {e["id"]: e for e in store["entries"]}
     new = filled = 0
 

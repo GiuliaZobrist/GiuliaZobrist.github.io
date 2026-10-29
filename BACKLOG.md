@@ -20,7 +20,6 @@ Approach (as in [Expedia Group's open source site](https://medium.com/expedia-gr
 
 ## Letterboxed
 - Update the list automatically via Github Action (same as Strava's custom cart would be build). Here it is more sensible since otherwise the list wouldn't update.
-- [ ] **practice, low priority**: local `.env` file for `LETTERBOXD_USER`. Commit a `.env.example` with a placeholder, load it with `set -a; source .env; set +a`, and document it in the README. Only worth it for practice or once there is more than one variable. Don't add `python-dotenv`: the scripts stay stdlib-only.
 
 ## Project cards (follow-up to `_data/projects.yml`)
 

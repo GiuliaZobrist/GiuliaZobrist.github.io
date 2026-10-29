@@ -51,22 +51,42 @@ Newest sorts first and opens by default; older ones collapse.
 ## Update the films list (Letterboxd)
 
 `_data/films.json` is filled from the public Letterboxd RSS feed by `scripts/update_films.py`
-(standard library only, Python 3). In production a weekly GitHub Action runs it; locally you can
-run it yourself to try it out.
+(standard library only, Python 3). A GitHub Action (`.github/workflows/letterboxd.yml`) runs it
+and can also be started by hand from the repo's Actions tab; locally you can run it yourself.
 
-The script needs one variable, `LETTERBOXD_USER` (your Letterboxd username). It is not hardcoded
-anywhere. On GitHub it is the repository variable of the same name (Settings → Secrets and
-variables → Actions → Variables); locally, pass it inline from the repo root:
+The scripts need one variable, `LETTERBOXD_USER` (your Letterboxd username). It is not hardcoded
+anywhere. Both `update_films.py` and `import_csv.py` read it the same way (`filmslib.require_user()`)
+and exit with "LETTERBOXD_USER is not set" if it is missing.
+
+- **On GitHub:** a repository *variable* (not a secret: the name is public, and secrets are masked
+  in logs) under Settings → Secrets and variables → Actions → Variables. The workflow passes it
+  to the script through `env:`.
+- **Locally:** put it in a `.env` file in the repo root (gitignored, and Jekyll skips dotfiles):
+
+  ```sh
+  echo 'LETTERBOXD_USER=<your username>' > .env
+  ```
+
+  Load it into the current terminal session, then run from the repo root:
+
+  ```sh
+  set -a; source .env; set +a                  # once per terminal
+  python3 scripts/update_films.py              # e.g. "2 new, 0 updated, 48 unchanged"
+  git diff _data/films.json                    # review; git checkout _data/films.json undoes it
+  ```
+
+  Without a file, inline works too: `LETTERBOXD_USER=<name> python3 scripts/update_films.py`.
+
+Tests (offline, standard library only, use the trimmed feed in `tests/fixtures/rss.xml`):
 
 ```sh
-LETTERBOXD_USER=<your username> python3 scripts/update_films.py   # e.g. "2 new, 0 updated, 48 unchanged"
-git diff _data/films.json    # review what changed; git checkout _data/films.json undoes it
+python3 -m unittest discover -s tests -v
 ```
 
-Good to know: running it twice changes nothing the second time; it only adds and updates
-entries (a film deleted on Letterboxd must be removed from the JSON by hand); and the feed only
-holds about 50 recent items, so the full history came from a one-time CSV export
-(`scripts/import_csv.py`).
+Good to know: running the script twice changes nothing the second time; it only adds and updates
+entries (a film deleted on Letterboxd must be removed from the JSON by hand); a like is never
+removed by the feed; and the feed only holds about 50 recent items, so the full history came from
+a one-time CSV export (`scripts/import_csv.py`, same variable).
 
 ## Deploy
 

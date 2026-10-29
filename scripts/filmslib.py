@@ -4,7 +4,9 @@ Used by import_csv.py (one-time history) and update_films.py (weekly RSS delta)
 so both produce identical entry ids and an identical file layout.
 """
 import json
+import os
 import re
+import sys
 import unicodedata
 from pathlib import Path
 
@@ -21,6 +23,15 @@ def slugify(text):
 
 def entry_id(title, year, watched):
     return slugify(f"{title} {year} {watched}")
+
+
+def require_user():
+    """The Letterboxd username, from $LETTERBOXD_USER (a repository variable in the
+    Action, set inline locally). Not hardcoded anywhere; exits if missing."""
+    user = os.environ.get("LETTERBOXD_USER")
+    if not user:
+        sys.exit("LETTERBOXD_USER is not set")
+    return user
 
 
 def load(path=STORE):

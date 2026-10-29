@@ -10,7 +10,6 @@ entries and never touches stored tags (the feed has none). Fails loudly, with th
 file untouched, if the feed is unreachable or yields no films.
 """
 import html
-import os
 import re
 import sys
 import urllib.request
@@ -99,9 +98,7 @@ def merge(store, films):
 
 
 def main():
-    user = os.environ.get("LETTERBOXD_USER")
-    if not user:
-        sys.exit("LETTERBOXD_USER is not set")
+    user = filmslib.require_user()
     films = parse(fetch(user))
     if not films:
         sys.exit("feed contained no films; file untouched")

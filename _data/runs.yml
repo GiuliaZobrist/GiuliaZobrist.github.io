@@ -7,6 +7,11 @@
 #   place       – where the run was (free text, shown as a caption)
 #   description – one line, written by you
 #
+- id: "20523780623"
+  token: "5DmXmblxfURrVN-2qEOyOcHv0Ot-r666PONTNew1fio"
+  place: "Brescia, IT"
+  description: "La vittoria alata."
+
 - id: "19972522066"
   token: "LBagL425K1y8JYWTWz9X7diJmAh_LBxpIoK5MOjc2O8"
   place: "Copenhagen, DK"

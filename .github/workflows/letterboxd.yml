@@ -1,0 +1,43 @@
+name: Update films from Letterboxd
+
+on:
+  workflow_dispatch:
+  # TEMP: lets us test this skeleton from the feature branch before it exists on main.
+  # Remove before merging.
+  push:
+    branches: [feature/letterboxd-with-actions]
+    paths: [.github/workflows/letterboxd.yml]
+
+# Least privilege: read-only for now. The commit step (Step 4) will need contents: write.
+permissions:
+  contents: read
+
+# One run at a time; a second trigger waits instead of racing the first.
+concurrency:
+  group: letterboxd
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+
+      - name: Run tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Fetch the feed and merge into _data/films.json
+        env:
+          LETTERBOXD_USER: ${{ vars.LETTERBOXD_USER }}
+        run: python scripts/update_films.py
+
+      # No commit yet: show what the script would change.
+      - name: Show the diff
+        run: git diff --stat

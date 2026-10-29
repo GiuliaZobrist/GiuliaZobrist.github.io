@@ -9,7 +9,6 @@ import unicodedata
 from pathlib import Path
 
 STORE = Path(__file__).resolve().parent.parent / "_data" / "films.json"
-USER = "lemongiu_cinema"
 
 FIELDS = ["id", "title", "year", "watched", "rating", "liked", "rewatch",
           "review", "tags", "url", "media", "tmdb_id", "poster", "logged_at"]
@@ -26,7 +25,7 @@ def entry_id(title, year, watched):
 
 def load(path=STORE):
     if not path.exists():
-        return {"user": USER, "entries": []}
+        return {"entries": []}
     return json.loads(path.read_text(encoding="utf-8"))
 
 
@@ -43,7 +42,7 @@ def save(store, path=STORE):
     content-free fields would change."""
     entries = sort_entries([{k: e.get(k) for k in FIELDS} for e in store["entries"]])
     out = {
-        "user": store.get("user", USER),
+        "user": store.get("user"),
         "last_logged_at": max((e["logged_at"] for e in entries if e["logged_at"]), default=None),
         "entries": entries,
     }

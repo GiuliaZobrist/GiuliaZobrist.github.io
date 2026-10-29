@@ -1,0 +1,45 @@
+{%- comment -%}
+  One project card. Usage: {% include project-card.html p=project %}
+  Data comes from _data/projects.yml; markup mirrors the .project-card pattern.
+{%- endcomment -%}
+{%- assign p = include.p -%}
+<!-- Project card: {{ p.slug }} -->
+<div class="project-card" id="{{ p.slug }}">
+  <details>
+    <summary>
+      <div class="card-thumb-wrap">
+        <img class="card-thumb" src="/assets/github-projects/{{ p.thumb }}" alt="{{ p.alt }}" />
+      </div>
+      <h3>{{ p.slug }}</h3>
+      <span class="card-chevron">↓</span>
+    </summary>
+
+    <p class="project-card-desc">{{ p.description }}</p>
+
+    <div class="tags">
+      {%- for t in p.tags %}
+      <span class="tag">{{ t }}</span>
+      {%- endfor %}
+    </div>
+
+    {%- if p.images %}
+    <div class="project-card-images">
+      {%- for img in p.images %}
+      <img src="/assets/github-projects/{{ img.src }}" alt="{{ img.alt }}" />
+      {%- endfor %}
+    </div>
+    {%- endif %}
+
+    <ul>
+      {%- for f in p.features %}
+      <li>{{ f }}</li>
+      {%- endfor %}
+    </ul>
+
+    {%- if p.repo %}
+    <a class="project-link" href="{{ p.repo }}">
+      View on GitHub →
+    </a>
+    {%- endif %}
+  </details>
+</div>

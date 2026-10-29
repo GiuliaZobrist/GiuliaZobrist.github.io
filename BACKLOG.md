@@ -11,28 +11,19 @@ Another option is to try to create a Docker file and run it "as if" on Github Pa
 ## Strava
 
 - [ ] **low priority**: Custom card to embed Strava iframe. How it works: at build time, a scheduled GitHub Action calls the API, writes `_data/runs.json`, a Liquid template renders it in the site's own type/palette. One-time: register a Strava app, run the OAuth handshake once, add repo secrets; the workflow must write Strava's rotating refresh token back to a secret each run. ~60 lines total. Only worth it if the design becomes annoying.
-<<<<<<< HEAD:BACKLOG.md
-=======
-<<<<<<< Updated upstream:TODO.md
-=======
->>>>>>> origin/main:TODO.md
 
 ## GitHub projects
 
 - [ ] **idea**: Automate listing my public GitHub projects instead of hand-writing them in `index.html`. 
 (!) I tried to solve this issue already in my-skills with presentable-readme.
 Approach (as in [Expedia Group's open source site](https://medium.com/expedia-group-tech/building-the-expedia-group-open-source-site-fbdb8764dfe9)): a scheduled GitHub Action queries the GitHub GraphQL API for repository info (name, description, topics, language, stars, last push), writes `_data/repos.json`, and a Liquid template renders it in the site's own style (reuse the `.project-card` pattern). Same fetch-commit-rebuild flow as the Letterboxd Action, so reuse its workflow shape. Decide first: which repos to include (e.g. an opt-in topic like `showcase`, or an allowlist in `_data/`), and exclude forks and archived repos. The built-in `GITHUB_TOKEN` is enough for public data, so no secrets to set up. 
-<<<<<<< HEAD:BACKLOG.md
-=======
 
 ## Letterboxed
 - Update the list automatically via Github Action (same as Strava's custom cart would be build). Here it is more sensible since otherwise the list wouldn't update.
+- [ ] **practice, low priority**: local `.env` file for `LETTERBOXD_USER`. Commit a `.env.example` with a placeholder, load it with `set -a; source .env; set +a`, and document it in the README. Only worth it for practice or once there is more than one variable. Don't add `python-dotenv`: the scripts stay stdlib-only.
 
 ## Project cards (follow-up to `_data/projects.yml`)
 
 Cards now render from `_data/projects.yml` via `_includes/project-card.html` (content only in YAML, markup once). Two follow-ups:
 
 - [ ] **Scheduled Action for repo metadata**: a workflow (cron + manual dispatch, same fetch-commit shape as the Letterboxd one) queries the GitHub GraphQL API with the built-in `GITHUB_TOKEN` for the repos listed in `projects.yml` (match on `repo`), writes `_data/repos.json` (stars, primary language, last push, archived flag, topics), and commits only if it changed. `project-card.html` then looks up the matching entry and shows e.g. language and last-updated next to the link. `projects.yml` stays the curated source (images, bullets, wording); `repos.json` is script-owned and never hand-edited. Decide first: show stars or not, and what to do if a repo is private or deleted (skip metadata, keep the card). This supersedes the "Automate listing my public GitHub projects" idea above.
-
->>>>>>> Stashed changes:BACKLOG.md
->>>>>>> origin/main:TODO.md

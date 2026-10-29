@@ -48,6 +48,26 @@ Body in markdown.
 
 Newest sorts first and opens by default; older ones collapse.
 
+## Update the films list (Letterboxd)
+
+`_data/films.json` is filled from the public Letterboxd RSS feed by `scripts/update_films.py`
+(standard library only, Python 3). In production a weekly GitHub Action runs it; locally you can
+run it yourself to try it out.
+
+The script needs one variable, `LETTERBOXD_USER` (your Letterboxd username). It is not hardcoded
+anywhere. On GitHub it is the repository variable of the same name (Settings → Secrets and
+variables → Actions → Variables); locally, pass it inline from the repo root:
+
+```sh
+LETTERBOXD_USER=<your username> python3 scripts/update_films.py   # e.g. "2 new, 0 updated, 48 unchanged"
+git diff _data/films.json    # review what changed; git checkout _data/films.json undoes it
+```
+
+Good to know: running it twice changes nothing the second time; it only adds and updates
+entries (a film deleted on Letterboxd must be removed from the JSON by hand); and the feed only
+holds about 50 recent items, so the full history came from a one-time CSV export
+(`scripts/import_csv.py`).
+
 ## Deploy
 
 Push to `main` — GitHub Pages builds Jekyll natively (its own ``_site` version).

@@ -1,7 +1,39 @@
 {
   "user": "lemongiu_cinema",
-  "last_logged_at": "2026-10-04",
+  "last_logged_at": "2026-10-14",
   "entries": [
+    {
+      "id": "riders-of-justice-2020-2026-10-13",
+      "title": "Riders of Justice",
+      "year": 2020,
+      "watched": "2026-10-13",
+      "rating": 4.0,
+      "liked": false,
+      "rewatch": false,
+      "review": null,
+      "tags": [],
+      "url": "https://letterboxd.com/lemongiu_cinema/film/riders-of-justice/",
+      "media": "movie",
+      "tmdb_id": 663870,
+      "poster": null,
+      "logged_at": "2026-10-14"
+    },
+    {
+      "id": "snake-2026-2026-10-09",
+      "title": "Snake",
+      "year": 2026,
+      "watched": "2026-10-09",
+      "rating": 2.0,
+      "liked": false,
+      "rewatch": false,
+      "review": null,
+      "tags": [],
+      "url": "https://letterboxd.com/lemongiu_cinema/film/snake-2026/",
+      "media": "movie",
+      "tmdb_id": 1645164,
+      "poster": null,
+      "logged_at": "2026-10-10"
+    },
     {
       "id": "i-play-rocky-2026-2026-10-02",
       "title": "I Play Rocky",
@@ -17,7 +49,7 @@
       ],
       "url": "https://boxd.it/gBplb1",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 1286656,
       "poster": null,
       "logged_at": "2026-10-03"
     },
@@ -36,7 +68,7 @@
       ],
       "url": "https://boxd.it/gAKk1n",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 1421967,
       "poster": null,
       "logged_at": "2026-10-03"
     },
@@ -54,7 +86,7 @@
       ],
       "url": "https://boxd.it/gAKlAt",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 1241907,
       "poster": null,
       "logged_at": "2026-10-03"
     },
@@ -72,7 +104,7 @@
       ],
       "url": "https://boxd.it/gwotbV",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 1706729,
       "poster": null,
       "logged_at": "2026-09-28"
     },
@@ -88,7 +120,7 @@
       "tags": [],
       "url": "https://boxd.it/gwoAY1",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 1366,
       "poster": null,
       "logged_at": "2026-09-28"
     },
@@ -104,7 +136,7 @@
       "tags": [],
       "url": "https://boxd.it/ghpeKt",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 539,
       "poster": null,
       "logged_at": "2026-09-11"
     },
@@ -122,7 +154,7 @@
       ],
       "url": "https://boxd.it/fJItNJ",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 1314122,
       "poster": null,
       "logged_at": "2026-08-10"
     },
@@ -140,7 +172,7 @@
       ],
       "url": "https://boxd.it/fJIlWX",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 1312310,
       "poster": null,
       "logged_at": "2026-08-10"
     },
@@ -158,7 +190,7 @@
       ],
       "url": "https://boxd.it/fJINL9",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 1618651,
       "poster": null,
       "logged_at": "2026-08-10"
     },
@@ -174,7 +206,7 @@
       "tags": [],
       "url": "https://boxd.it/fHpP5X",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 1100099,
       "poster": null,
       "logged_at": "2026-08-08"
     },
@@ -190,7 +222,7 @@
       "tags": [],
       "url": "https://boxd.it/fA4tAf",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 1368337,
       "poster": null,
       "logged_at": "2026-08-02"
     },
@@ -206,7 +238,7 @@
       "tags": [],
       "url": "https://boxd.it/fqsXbH",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 1275779,
       "poster": null,
       "logged_at": "2026-07-25"
     },
@@ -222,7 +254,7 @@
       "tags": [],
       "url": "https://boxd.it/emRPwN",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 1214931,
       "poster": null,
       "logged_at": "2026-05-15"
     },
@@ -238,7 +270,7 @@
       "tags": [],
       "url": "https://boxd.it/ekgNCx",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 1159206,
       "poster": null,
       "logged_at": "2026-05-12"
     },
@@ -254,7 +286,7 @@
       "tags": [],
       "url": "https://boxd.it/dIeaOt",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 687163,
       "poster": null,
       "logged_at": "2026-03-28"
     },
@@ -272,7 +304,7 @@
       ],
       "url": "https://boxd.it/dvVY4f",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 120,
       "poster": null,
       "logged_at": "2026-03-15"
     },
@@ -288,7 +320,7 @@
       "tags": [],
       "url": "https://boxd.it/dsBSdN",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 1317288,
       "poster": null,
       "logged_at": "2026-03-10"
     },
@@ -304,7 +336,7 @@
       "tags": [],
       "url": "https://boxd.it/d9bOir",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 639988,
       "poster": null,
       "logged_at": "2026-02-16"
     },
@@ -320,7 +352,7 @@
       "tags": [],
       "url": "https://boxd.it/cMDT1f",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 1574239,
       "poster": null,
       "logged_at": "2026-01-24"
     },
@@ -336,7 +368,7 @@
       "tags": [],
       "url": "https://boxd.it/cNj1GR",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 1536259,
       "poster": null,
       "logged_at": "2026-01-24"
     },
@@ -352,7 +384,7 @@
       "tags": [],
       "url": "https://boxd.it/cpQrH7",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 718032,
       "poster": null,
       "logged_at": "2026-01-04"
     },
@@ -468,7 +500,7 @@
       ],
       "url": "https://boxd.it/gCGJL1",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 1400765,
       "poster": null,
       "logged_at": "2026-10-04"
     },
@@ -814,7 +846,7 @@
       "tags": [],
       "url": "https://boxd.it/cNlNbB",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 64682,
       "poster": null,
       "logged_at": "2026-01-24"
     },
@@ -1086,7 +1118,7 @@
       "tags": [],
       "url": "https://boxd.it/eoLjtD",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 823219,
       "poster": null,
       "logged_at": "2026-05-18"
     },
@@ -1134,7 +1166,7 @@
       "tags": [],
       "url": "https://boxd.it/ci1Y6t",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 424694,
       "poster": null,
       "logged_at": "2025-12-29"
     },
@@ -1262,7 +1294,7 @@
       "tags": [],
       "url": "https://boxd.it/ci4i6d",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 747188,
       "poster": null,
       "logged_at": "2025-12-29"
     },
@@ -1278,7 +1310,7 @@
       "tags": [],
       "url": "https://boxd.it/eoLher",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 1342099,
       "poster": null,
       "logged_at": "2026-05-18"
     },
@@ -1390,7 +1422,7 @@
       "tags": [],
       "url": "https://boxd.it/fqsROX",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 368166,
       "poster": null,
       "logged_at": "2026-07-25"
     },
@@ -1454,7 +1486,7 @@
       "tags": [],
       "url": "https://boxd.it/d9c0tr",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 705996,
       "poster": null,
       "logged_at": "2026-02-16"
     },
@@ -1502,7 +1534,7 @@
       "tags": [],
       "url": "https://boxd.it/ci4fYh",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 542178,
       "poster": null,
       "logged_at": "2025-12-29"
     },
@@ -1518,7 +1550,7 @@
       "tags": [],
       "url": "https://boxd.it/ci3TXV",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 1170260,
       "poster": null,
       "logged_at": "2025-12-29"
     },
@@ -1550,7 +1582,7 @@
       "tags": [],
       "url": "https://boxd.it/ci2QUd",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 370172,
       "poster": null,
       "logged_at": "2025-12-29"
     },
@@ -1566,7 +1598,7 @@
       "tags": [],
       "url": "https://boxd.it/cMDQ91",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 787836,
       "poster": null,
       "logged_at": "2026-01-24"
     },
@@ -1614,7 +1646,7 @@
       "tags": [],
       "url": "https://boxd.it/dzJVK5",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 552178,
       "poster": null,
       "logged_at": "2026-03-19"
     },
@@ -1645,8 +1677,8 @@
       "review": null,
       "tags": [],
       "url": "https://boxd.it/ci21oP",
-      "media": "movie",
-      "tmdb_id": null,
+      "media": "tv",
+      "tmdb_id": 87739,
       "poster": null,
       "logged_at": "2025-12-29"
     },
@@ -1678,7 +1710,7 @@
       "tags": [],
       "url": "https://boxd.it/eiqQ0j",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 828264,
       "poster": null,
       "logged_at": "2026-05-10"
     },
@@ -1694,7 +1726,7 @@
       "tags": [],
       "url": "https://boxd.it/ci3BBd",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 486225,
       "poster": null,
       "logged_at": "2025-12-29"
     },
@@ -1742,7 +1774,7 @@
       "tags": [],
       "url": "https://boxd.it/ci2xuv",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 324668,
       "poster": null,
       "logged_at": "2025-12-29"
     },
@@ -1806,7 +1838,7 @@
       "tags": [],
       "url": "https://boxd.it/ci2Khp",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 68718,
       "poster": null,
       "logged_at": "2025-12-29"
     },
@@ -1838,7 +1870,7 @@
       "tags": [],
       "url": "https://boxd.it/ci2G8N",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 266856,
       "poster": null,
       "logged_at": "2025-12-29"
     },
@@ -1870,7 +1902,7 @@
       "tags": [],
       "url": "https://boxd.it/ci47Dl",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 120467,
       "poster": null,
       "logged_at": "2025-12-29"
     },
@@ -1886,7 +1918,7 @@
       "tags": [],
       "url": "https://boxd.it/ci3M9z",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 208277,
       "poster": null,
       "logged_at": "2025-12-29"
     },
@@ -1984,7 +2016,7 @@
       "tags": [],
       "url": "https://boxd.it/ci4dzz",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 9428,
       "poster": null,
       "logged_at": "2025-12-29"
     },
@@ -2000,7 +2032,7 @@
       "tags": [],
       "url": "https://boxd.it/ci3RWL",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 35403,
       "poster": null,
       "logged_at": "2025-12-29"
     },
@@ -2016,7 +2048,7 @@
       "tags": [],
       "url": "https://boxd.it/ci4blP",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 83666,
       "poster": null,
       "logged_at": "2025-12-29"
     },
@@ -2032,7 +2064,7 @@
       "tags": [],
       "url": "https://boxd.it/ci2tC1",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 2502,
       "poster": null,
       "logged_at": "2025-12-29"
     },
@@ -2048,7 +2080,7 @@
       "tags": [],
       "url": "https://boxd.it/ci2oTh",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 2503,
       "poster": null,
       "logged_at": "2025-12-29"
     },
@@ -2080,7 +2112,7 @@
       "tags": [],
       "url": "https://boxd.it/ci2a6F",
       "media": "movie",
-      "tmdb_id": null,
+      "tmdb_id": 22954,
       "poster": null,
       "logged_at": "2025-12-29"
     },

@@ -1,16 +1,19 @@
 name: Update films from Letterboxd
 
 on:
+  # Mondays 16:05 UTC = 17:05 Zürich in winter, 18:05 in summer (cron has no time zones).
+  # Scheduled runs only ever happen on the default branch (main).
+  schedule:
+    - cron: "5 16 * * 1"
   workflow_dispatch:
-  # TEMP: lets us test this skeleton from the feature branch before it exists on main.
+  # TEMP: dry-run this workflow from the feature branch (the commit job is skipped there).
   # Remove before merging.
   push:
     branches: [feature/letterboxd-with-actions]
     paths: [.github/workflows/letterboxd.yml]
 
-# Least privilege: read-only for now. The commit step (Step 4) will need contents: write.
-permissions:
-  contents: read
+# Nothing by default; each job asks for exactly what it needs.
+permissions: {}
 
 # One run at a time; a second trigger waits instead of racing the first.
 concurrency:
@@ -18,9 +21,12 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Job 1 handles data from the outside world (the feed). Read-only: it can never push.
   update:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -38,6 +44,61 @@ jobs:
           LETTERBOXD_USER: ${{ vars.LETTERBOXD_USER }}
         run: python scripts/update_films.py
 
-      # No commit yet: show what the script would change.
       - name: Show the diff
         run: git diff --stat
+
+      - name: Hand the updated file to the commit job
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: films
+          path: _data/films.json
+          if-no-files-found: error
+          retention-days: 1
+
+  # Job 2 has write access but never runs the parser or the tests, only checks and commits.
+  # Skipped on the feature branch, so a dry run can't commit anything.
+  commit:
+    needs: update
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        # credentials stay saved (default): the push below needs them
+
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: films
+          path: incoming
+
+      - name: Check the incoming file before trusting it
+        run: |
+          python3 - <<'PY'
+          import json
+          new = json.load(open("incoming/films.json"))["entries"]
+          old = json.load(open("_data/films.json"))["entries"]
+          assert new, "incoming file has no entries"
+          assert len(new) >= len(old), f"entries shrank: {len(old)} -> {len(new)}"
+          assert all(e.get("id") and e.get("watched") for e in new), "entry without id or watched"
+          print(f"ok: {len(old)} -> {len(new)} entries")
+          PY
+
+      - name: Commit and push if changed
+        run: |
+          cp incoming/films.json _data/films.json
+          rm -r incoming
+          # Only _data/films.json may differ, otherwise stop.
+          if [ -n "$(git status --porcelain | grep -v ' _data/films.json$')" ]; then
+            echo "unexpected changes:"; git status --porcelain; exit 1
+          fi
+          if git diff --quiet; then
+            echo "nothing new, no commit"
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add _data/films.json
+          git commit -m "films: weekly update from Letterboxd"
+          git push

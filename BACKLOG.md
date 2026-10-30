@@ -18,9 +18,6 @@ Another option is to try to create a Docker file and run it "as if" on Github Pa
 (!) I tried to solve this issue already in my-skills with presentable-readme.
 Approach (as in [Expedia Group's open source site](https://medium.com/expedia-group-tech/building-the-expedia-group-open-source-site-fbdb8764dfe9)): a scheduled GitHub Action queries the GitHub GraphQL API for repository info (name, description, topics, language, stars, last push), writes `_data/repos.json`, and a Liquid template renders it in the site's own style (reuse the `.project-card` pattern). Same fetch-commit-rebuild flow as the Letterboxd Action, so reuse its workflow shape. Decide first: which repos to include (e.g. an opt-in topic like `showcase`, or an allowlist in `_data/`), and exclude forks and archived repos. The built-in `GITHUB_TOKEN` is enough for public data, so no secrets to set up. 
 
-## Letterboxed
-- Update the list automatically via Github Action (same as Strava's custom cart would be build). Here it is more sensible since otherwise the list wouldn't update.
-
 ## Project cards (follow-up to `_data/projects.yml`)
 
 Cards now render from `_data/projects.yml` via `_includes/project-card.html` (content only in YAML, markup once). Two follow-ups:

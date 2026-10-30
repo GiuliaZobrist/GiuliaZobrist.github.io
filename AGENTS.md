@@ -70,6 +70,12 @@ Implementation notes (all in `index.html` + `_layouts/default.html`):
 `_data/films.json` is the store (see `PLAN.md`). Don't hand-edit it except to
 remove an entry deleted on Letterboxd; scripts own the file.
 
+- A weekly GitHub Action (`.github/workflows/letterboxd.yml`, Mondays) runs
+  `scripts/update_films.py` and commits the file to `main` as `github-actions[bot]`
+  — so `git pull` before editing. Details and the security design are in `PLAN.md`
+  (Task 4). Run the script locally with `LETTERBOXD_USER` set (see `README.md`);
+  tests: `python3 -m unittest discover -s tests`.
+
 - History was imported once (2026-10) from a Letterboxd data export. That export
   contains private data (email, watchlist): keep it in `tmp/` (gitignored and
   excluded from Jekyll), never commit it. Updates come from the public RSS feed

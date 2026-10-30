@@ -2,7 +2,7 @@
 
 **How to use this file (Claude Code):** read `AGENTS.md` and `CONTEXT.md` first (this is a Jekyll site, all CSS inline in `_layouts/default.html`). Work through the tasks in order and tick them off. Don't change the **Decisions** section without asking.
 
-**Status (2026-10-04):** UI is done (Task 5). History imported (Task 6): `_data/films.json` has 129 entries, rebuilt from a fresh export after the duplicate and sensitive tags were fixed on Letterboxd. Task 0 done (fixture saved, not committed). Open: Tasks 1 to 4 (weekly RSS update, tests, Action), plus the tag decision below. See **Git plan** at the end for what is committed when.
+**Status (2026-10-30):** All tasks done except optional ones (2, 7). The weekly Action is live on `main`: it runs Mondays 16:05 UTC, commits `_data/films.json` only when it changed, and the site rebuilds. History was imported once (Task 6, 129 entries); the weekly delta keeps it current. See **As built** under Task 4 for where the implementation differs from the original plan.
 
 ## Decisions (already made by the human)
 
@@ -105,11 +105,11 @@ _layouts/default.html          # + .films-* CSS block (done)
 _data/films.json               # the store (130 entries imported)
 scripts/filmslib.py            # slugify, load, deterministic save (done)
 scripts/import_csv.py          # one-time history backfill (done)
-scripts/update_films.py        # weekly RSS delta (Task 1)
+scripts/update_films.py        # weekly RSS delta (done)
 assets/posters/                # only if Task 2 is done
-tests/fixtures/rss.xml         # live feed snapshot, 2026-10-04 (done)
-tests/test_films.py            # Task 3
-.github/workflows/letterboxd.yml
+tests/fixtures/rss.xml         # feed snapshot 2026-10-04, trimmed to 7 items (done)
+tests/test_films.py            # 10 offline unittest tests (done)
+.github/workflows/letterboxd.yml   # weekly Action (done)
 ```
 
 ## Tasks
@@ -118,19 +118,18 @@ tests/test_films.py            # Task 3
 - `curl -A "Mozilla/5.0" https://letterboxd.com/lemongiu_cinema/rss/ -o tests/fixtures/rss.xml`.
 - Confirm the facts above still hold. Note any difference in a short comment at the top of the script.
 
-**Done when:** fixture committed and facts confirmed. *Fixture saved (46 KB, 50 items). Not yet committed.*
+**Done when:** fixture committed and facts confirmed. *Committed; later trimmed to 7 hand-picked items, see the docstring of `tests/test_films.py`.*
 
-### Task 1: `scripts/update_films.py`
-- Config via env: `LETTERBOXD_USER` (default `lemongiu_cinema`), `--rss-file` (offline/test mode), `--out _data/films.json`. Reuse `filmslib` for ids, merge and save. RSS item fields map to the existing entry shape (`tags: []` for new entries; keep existing tags on update).
-- Merge rule for entries already in the store (from the CSV): RSS wins for `rating`, `liked`, `rewatch`, `review`, `url`, `tmdb_id`, `poster`, `media`, `logged_at`; keep CSV `tags` (the feed has none).
-- Fetch with a descriptive User-Agent, a 30s timeout, and one retry with backoff.
-- Parse items. Skip anything without `filmTitle`. Map TV vs movie. Parse rating as float or `None`. Extract the review per the rule above (strip tags, unescape, collapse whitespace).
-- **Delta load:** merge into the existing JSON by `id`. Classify each feed item as new, changed (any field differs), or unchanged. Only new and changed entries are written. Print a one-line summary (`3 new, 1 updated, 46 unchanged`) so the Action log shows what the weekly run did. Editing a review or rating on Letterboxd propagates; deleting an entry on Letterboxd does not remove it locally (document this).
-- Update `last_logged_at` to the newest `logged_at` seen. Warn (don't fail) if zero feed items overlap with stored entries while stored entries exist.
-- Sort and write deterministically (stable key order, `indent=2`, trailing newline) so git diffs stay clean. Don't rewrite the file if nothing changed (`filmslib.save` already does this).
-- **Safety:** if the fetch fails or parses 0 films, exit non-zero and leave the existing file untouched.
+### Task 1: `scripts/update_films.py` — DONE
+~110 lines, standard library only.
 
-**Done when:** running it twice on the fixture produces an identical file the second time.
+- **Config:** `LETTERBOXD_USER` env var only, read by `filmslib.require_user()` (shared with `import_csv.py`). No default, no `--rss-file`, no `--out`. Exits with "LETTERBOXD_USER is not set" if missing.
+- **Fetch:** hardcoded `letterboxd.com` host, username validated against `[A-Za-z0-9_]+`, User-Agent, 30s timeout, 2 MB read cap. No retry: the next weekly run is the retry.
+- **Parse:** real XML parser; skips items without `filmTitle` (lists); `tvId` means `media: "tv"`; rating float or `None`; review from the paragraphs after the poster, a lone "Watched on ..." means `None`. `logged_at` is the bare date of `pubDate` (same shape as CSV entries). `poster` stays `null` (the UI doesn't use posters).
+- **Merge by `id`:** the feed wins for rating, rewatch, review, media, tmdb_id. Once set, the feed never overwrites `tags`, `url` (`boxd.it` links) or `logged_at`. **A like is never removed by the feed** (feed likes are per log, CSV likes are per film). Deleting an entry on Letterboxd does not remove it here.
+- Prints `N new, M updated, K unchanged`. Warns if no feed item matches stored entries. Exits non-zero, file untouched, on a failed fetch or 0 films. `filmslib.save` writes deterministically and skips the write if nothing changed.
+
+**Done when:** running it twice produces an identical file the second time. ✔ (`2 new, 48 updated`, then `0 new, 0 updated, 50 unchanged`)
 
 ### Task 2 (optional now): Poster caching
 - For each entry without a local poster, download the feed's poster URL to `assets/posters/<tmdb_id>.jpg` (or `<id>.jpg` if there is no TMDB id).
@@ -140,28 +139,18 @@ tests/test_films.py            # Task 3
 
 **Done when:** all RSS entries have a poster file or an explicit `null`.
 
-### Task 3: Tests (`pytest`)
-Using the fixture and a small CSV fixture (a trimmed copy of the export, no personal files), cover:
-- Lists are skipped.
-- TV item (`tvId`) is parsed as `media: "tv"`.
-- Entities and non-ASCII titles decode correctly.
-- Sorting is by `watched`, not feed order (e.g. Violette 2026-10-01 must come before The Zürrer Bakery 2023-07-01 even though the bakery appears earlier in the feed than many other entries).
-- Review extraction: "Watched on ..." means `null`; the We Live in Time item yields its review text.
-- Merge idempotency and update-in-place, and that an RSS item merging onto a CSV entry keeps the CSV `tags`.
-- `import_csv.py`: idempotent, liked and review joins (We Live in Time is liked, rewatch and reviewed).
-- 0 parsed items causes a non-zero exit and an untouched file.
+### Task 3: Tests — DONE
+`python3 -m unittest discover -s tests -v` (standard library, no pytest, so the workflow installs nothing). 10 tests in `tests/test_films.py`, offline, using the trimmed fixture: lists skipped, TV vs movie, entities and non-ASCII titles, review extraction, merge idempotency, stored fields kept and likes never removed, sorting by `watched` not feed order, empty feed exits without saving, missing or invalid user rejected. Not covered: `import_csv.py` (one-time script, no CSV fixture).
 
-**Done when:** `pytest` is green with no network access.
+**Done when:** green with no network access. ✔
 
-### Task 4: GitHub Action (`.github/workflows/letterboxd.yml`)
-- Triggers: `schedule` **once a week** (e.g. Monday 06:17 UTC: `17 6 * * 1`; GitHub cron is UTC and may run a few minutes late) plus `workflow_dispatch` for on-demand runs.
-- `permissions: contents: write`. Add `concurrency` so runs don't overlap.
-- Steps: checkout, setup-python, run tests, run the script, commit `_data/films.json` (and `assets/posters/` if Task 2) only if changed (`git diff --staged --quiet ||` pattern), then push. Pushing to `main` triggers the Pages build, so there is no extra deploy step.
-- Env: `LETTERBOXD_USER` from a repo variable or the workflow default.
-- Prerequisite: the current branch is `feature/letterboxd-rss`. The workflow only runs on the default branch, so it takes effect after merging to `main`.
-- Note: GitHub may disable scheduled workflows after about 60 days without repo activity. A weekly run that finds nothing new makes no commit, so a quiet stretch could trigger this. Mention it in the README, keep `workflow_dispatch`, and optionally add a small keepalive step (e.g. an empty commit when the last commit is older than 50 days).
+### Task 4: GitHub Action (`.github/workflows/letterboxd.yml`) — DONE
+- Triggers: `schedule` Mondays `5 16 * * 1` (UTC; 17:05 Zürich in winter, 18:05 in summer) and `workflow_dispatch`.
+- **As built, two jobs** (differs from the original single-job plan, for least privilege): `update` (`contents: read`) runs the tests and the script and uploads `_data/films.json` as an artifact; `commit` (`contents: write`, only on `main`) downloads it, checks it (not empty, not smaller than the stored file, entries have `id` and `watched`), requires that only `_data/films.json` differs, then commits as `github-actions[bot]` and pushes if changed. Top-level `permissions: {}`, `concurrency`, `timeout-minutes`, all actions pinned by commit SHA.
+- `LETTERBOXD_USER` is a repository **variable** (Settings, Secrets and variables, Actions), passed through `env:`.
+- Scheduled workflows are disabled by GitHub after about 60 days without repo activity; re-enable in the Actions tab if the site goes stale. A failed run leaves the site on the last good data.
 
-**Done when:** a manual run produces a commit once, and a second run produces none.
+**Done when:** a manual run produces a commit once, and a second run produces none. ✔ (and the site rebuilt)
 
 ### Task 5: Frontend — DONE
 Server-side Liquid, no `films.js`, no separate page.
@@ -229,25 +218,12 @@ Answered:
 9. `w-*` tags: kept in the data, risk owned by Giulia (see Decisions section above).
 
 Still open:
-5. Weekly run time (default Monday 06:17 UTC).
+5. Weekly run time: Monday 16:05 UTC (decided).
 8. Letterboxd links: entries link to `boxd.it` short URLs. Fine, or resolve to full film URLs?
 
 ## Git plan
 
-Branch: `feature/letterboxd-with-actions`. The UI, data and housekeeping (formerly steps 1 to 3) are already in `main` via PR #3.
-
-Commits so far, one purpose each:
-1. **Tooling:** `scripts/filmslib.py`, `scripts/import_csv.py`.
-2. **Fixture:** `tests/fixtures/rss.xml` (snapshot of the live feed, 2026-10-04).
-3. **Plan:** `PLAN.md`, `AGENTS.md` (tag decision).
-
-Still to build, in this order, each as its own commit:
-1. `scripts/update_films.py`: RSS delta merge (Task 1), including `guid` matching if approved.
-2. `tests/test_films.py` (Task 3), offline, using the fixture.
-3. `.github/workflows/letterboxd.yml` as a skeleton with `workflow_dispatch` only (runs tests and the script, no commit step).
-4. Add the weekly `schedule` and the commit-and-push step (Task 4).
-
-Then open the PR to `main`. The schedule only runs from the default branch, so after merging, trigger one manual run and confirm that it commits once, a second run commits nothing, and the live site rebuilds.
+Done: the work was merged to `main` in PR #5 (branch `feature/letterboxd-with-actions`). The weekly Action now commits `_data/films.json` to `main` directly, so **pull before you edit**.
 
 Never commit: `tmp/` (the Letterboxd export holds email, watchlist, profile) and `.vscode/` (both gitignored).
 

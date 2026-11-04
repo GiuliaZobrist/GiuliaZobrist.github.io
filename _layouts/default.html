@@ -580,6 +580,10 @@
     .post-body p { margin-bottom: 1.25rem; }
     .post-body p:last-of-type { margin-bottom: 0; }
     .post-body em { font-style: italic; color: var(--muted); }
+    /* Post image floated right with text wrapping. Add .round for a circle, otherwise soft corners. */
+    .post-image { float: right; width: 240px; aspect-ratio: 1; object-fit: cover; border-radius: 8px; margin: 0.25rem 0 var(--sp-3) var(--sp-4); }
+    .post-image.round { border-radius: 50%; }
+    @media (max-width: 560px) { .post-image { float: none; display: block; width: 60%; margin: 0 auto var(--sp-4); } }
     .back-link { font-size: var(--t-nav); color: var(--muted); text-decoration: none; }
     .back-link:hover { color: var(--sage); }
 

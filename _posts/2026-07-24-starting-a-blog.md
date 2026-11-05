@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Starting a Blog"
-date: 2026-07-24
+date: 2026-07-24 08:00
 ---
 
 This blog starts from the cerebral, sometimes darker, moments I experience. I believe these moments are not here for nothing, that they deserve to be acknowledged. I rationalize them by writing.

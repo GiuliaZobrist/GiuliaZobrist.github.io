@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "On the End of the Holidays"
-date: 2026-07-24
+date: 2026-07-24 18:00
 ---
 
 There is a particular sadness that arrives at the end of longer holidays. It has nothing to do with the place I am leaving, only with the self I am leaving behind, a version of myself the rest of the year rarely has room for. On the last days of holidays, if I simply stay in this moment, I feel contentment. It is only when I think about tomorrow that my mood darkens.

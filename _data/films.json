@@ -1,6 +1,6 @@
 {
   "user": "lemongiu_cinema",
-  "last_logged_at": "2026-10-14",
+  "last_logged_at": "2026-11-08",
   "entries": [
     {
       "id": "riders-of-justice-2020-2026-10-13",
@@ -1569,6 +1569,22 @@
       "tmdb_id": null,
       "poster": null,
       "logged_at": "2025-08-14"
+    },
+    {
+      "id": "annette-2021-2021-12-27",
+      "title": "Annette",
+      "year": 2021,
+      "watched": "2021-12-27",
+      "rating": 2.5,
+      "liked": false,
+      "rewatch": false,
+      "review": null,
+      "tags": [],
+      "url": "https://letterboxd.com/lemongiu_cinema/film/annette/",
+      "media": "movie",
+      "tmdb_id": 424277,
+      "poster": null,
+      "logged_at": "2026-11-08"
     },
     {
       "id": "no-time-to-die-2021-2021-10-10",
